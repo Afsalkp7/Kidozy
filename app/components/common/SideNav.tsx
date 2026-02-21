@@ -5,7 +5,7 @@ export default function SideNav( { pathname }: { pathname: string } ){
 
     const navItems = [
         { name: 'Home', href: '/' },
-        { name: 'Shop', href: '/shop' },
+        // { name: 'Shop', href: '/shop' },
         { name: 'About Us', href: '/about' },
         { name: 'Collections', href: '/collections' },
         { name: 'Contact Us', href: '/contact' },
