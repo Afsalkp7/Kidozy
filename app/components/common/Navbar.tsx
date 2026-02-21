@@ -58,7 +58,7 @@ export default function Navbar() {
                 </div>
                 <div className="md:block hidden">
                     <ul className='flex justify-end gap-5 text-gray-700 text-center items-center'>
-                        <li ><Moon /></li>
+                        {/* <li ><Moon /></li> */}
                         <li className='bg-[#E96D92] p-2 text-white rounded-2xl'> Join Club </li>
                     </ul>
                 </div>
