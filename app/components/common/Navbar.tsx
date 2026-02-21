@@ -13,12 +13,24 @@ import {
 } from "@/components/ui/sheet"
 import SideNav from './SideNav';
 import LogoComponent from './Logo';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Navbar() {
     const [showNav, setShowNav] = useState(false)
     const navToggle = () => {
         setShowNav(!showNav)
     }
+
+    const pathname : string = usePathname();
+
+    const navItems = [
+        { name: 'Home', href: '/' },
+        { name: 'Shop', href: '/shop' },
+        { name: 'About Us', href: '/about' },
+        { name: 'Collections', href: '/collections' },
+        { name: 'Contact Us', href: '/contact' },
+    ];
 
     return (
         <>
@@ -28,11 +40,20 @@ export default function Navbar() {
                 </div>
                 <div className="md:block hidden">
                     <ul className="flex justify-between text-gray-700 gap-5">
-                        <li className='hover:text-[#2AB7B1] cursor-pointer hover:underline transition-all duration-300'>Home</li>
-                        <li className='hover:text-[#2AB7B1] cursor-pointer hover:underline transition-all duration-300'>Shop</li>
-                        <li className='hover:text-[#2AB7B1] cursor-pointer hover:underline transition-all duration-300'>About Us</li>
-                        <li className='hover:text-[#2AB7B1] cursor-pointer hover:underline transition-all duration-300'>Collections</li>
-                        <li className='hover:text-[#2AB7B1] cursor-pointer hover:underline transition-all duration-300'>Contact Us</li>
+                        {navItems.map((item) => {
+                            const isActive = pathname === item.href;
+                            return (
+                                <li key={item.name}>
+                                    <Link 
+                                        href={item.href}
+                                        className={`cursor-pointer transition-all duration-300 hover:text-[#2AB7B1] hover:underline
+                                            ${isActive ? 'text-[#2AB7B1] font-semibold underline' : 'text-gray-700'}`}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
                 <div className="md:block hidden">
@@ -53,7 +74,7 @@ export default function Navbar() {
                             <LogoComponent />
                         </div>
                     </SheetTitle>
-                    <SideNav />
+                    <SideNav pathname={pathname} />
                 </SheetContent>
             </Sheet>
 
